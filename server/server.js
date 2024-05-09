@@ -4,7 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const PORT = 8000;
+const PORT = 8001;
 const DB_HOST = process.env.DB_HOST;
 const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/users");
