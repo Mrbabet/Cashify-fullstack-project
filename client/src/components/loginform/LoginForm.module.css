@@ -1,4 +1,5 @@
 .loginSection {
+  height: 100%;
   display: flex;
   flex-direction: column;
   margin: 20px auto;
@@ -47,6 +48,10 @@
 }
 .paragraphDiv {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .googleBttn {
   height: 40px;
@@ -55,11 +60,21 @@
   border-radius: 20px;
   background-color: #f5f6fb;
   cursor: pointer;
+  align-items: center;
+  display: flex;
+  gap: 10px;
 }
 .googleBttn:hover {
   -webkit-box-shadow: 9px 2px 24px -5px rgba(168, 168, 186, 1);
   -moz-box-shadow: 9px 2px 24px -5px rgba(168, 168, 186, 1);
   box-shadow: 9px 2px 24px -5px rgba(168, 168, 186, 1);
+}
+.googlesymbol {
+  background-image: url("../../assets/googlesymbol.png");
+  width: 17.5px;
+  height: 18px;
+  background-size: contain;
+  margin-left: 20px;
 }
 .label {
   display: flex;
@@ -76,6 +91,10 @@
 }
 .form input::placeholder {
   font-size: 12px;
+}
+.requiredSpan {
+  margin-top: 5px;
+  color: red;
 }
 .form button {
   width: 100%;
@@ -107,4 +126,36 @@
   gap: 5px;
   margin-top: 25px;
   margin-bottom: 20px;
+}
+@media screen and (min-width: 768px) {
+  .logo {
+    background-image: url("../../assets/mobilelogo.png");
+    width: 306.5px;
+    height: 101px;
+    margin-bottom: 80px;
+  }
+  .formContainer {
+    width: 256px;
+    padding: 55px 85px 55px 85px;
+  }
+  .form label {
+    font-size: 12px;
+    margin-bottom: 40px;
+  }
+  .googleBttn {
+    margin-bottom: 30px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    display: flex;
+    margin-left: 15%;
+  }
+  .logo {
+    background-image: url("../../assets/desktoplogo.png");
+    width: 377px;
+    height: 139px;
+    margin-right: 155px;
+    margin-top: 200px;
+  }
 }
