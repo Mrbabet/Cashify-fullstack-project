@@ -63,7 +63,9 @@ const LoginForm = () => {
               )}
             </label>
             <div className={css.bttnsDiv}>
-              <button type="submit">LOG IN</button>
+              <button type="submit" className={css.active}>
+                LOG IN
+              </button>
               <button type="button">REGISTER</button>
             </div>
           </form>
