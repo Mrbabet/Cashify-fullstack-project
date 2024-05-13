@@ -1,0 +1,174 @@
+
+a {
+    text-decoration: none;
+}
+
+
+.balanceSection {
+    margin: 0;
+    background-color: #FFFFFF;
+    font-family: "Roboto", sans-serif;
+    min-width: 320px;
+    min-height: 567px;
+}
+
+.dataContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 20px 40px;
+}
+
+.returnButton {
+    display: flex;
+    padding:0;
+    font-size: 10px;
+    font-weight: bold;
+    width: 115px;
+    height: 18px;
+    border: none;
+    background-color: transparent;
+    align-items: center;
+}
+
+.reportsWrapper {
+    display: flex;
+    margin-top: 14px;
+    margin-bottom: 0;
+    justify-content: center;
+}
+
+.reportsText {
+    display: flex;
+    width: 84px;
+    justify-content: space-between;
+    align-items: center;
+    color:#52555F;
+    font-weight: 400px;
+    font-size: 12px;
+}
+
+.balanceTitle {
+    display: flex;
+    margin-top: 32px;
+    margin-bottom: 0;
+    justify-content: center;
+    color:#52555F;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.67;
+}
+
+.balanceInfo {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+    height: 44px;
+    align-items: center;
+    }
+
+.balanceValue {
+    font-weight: bold;
+    font-size: 12px;
+    margin: 0;
+    text-align:right;    
+    padding-right: 16px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 2px solid #FFFFFF;
+    border-right-width: 1px;
+    width: 100%;
+    border-top-left-radius: 22px;
+    border-bottom-left-radius: 22px;
+    background-color: transparent;
+}
+
+.balanceButton {
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    border-left-width: 1px;
+    border: 2px solid #FFFFFF;
+    text-align:left;
+    width: 100%;
+    background-color: transparent;
+    padding-left: 16px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #52555F;
+}
+
+.balanceButton:hover {
+    background-color: #FF751D;
+    color: #FFFFFF;
+}
+
+.calendar {
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: center;
+    gap:8px;
+}
+
+.date {
+    border: none;
+    background: none;
+    color: #52555F;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+}
+
+@media screen and (min-width: 768px) {
+    .returnButton {
+        display: none;
+    }
+
+    .dataContainer {
+        flex-direction:row-reverse;
+        padding: 40px 32px 60px 32px;
+        justify-content: space-between;
+    }   
+    
+    .balanceForm {
+        display: flex;
+        align-items: center;
+    }
+    .balanceTitle {
+        margin-top: 0;
+        margin-right: 21px;
+        width: 83px;
+        justify-content: right;
+
+    }
+
+   
+
+    .reportsWrapper {
+        margin: 0;
+    }
+
+    .balanceValue {
+        border-radius: 16px;
+        margin-right: 15px;
+        padding: 0;
+        width: 125px;
+        height: 44px;
+    }
+
+    .balanceButton {
+        border-radius: 16px;
+        text-align: center;
+        padding: 0;
+        width: 125px;
+        height: 44px;
+    }
+
+  
+}
+
+@media screen and (min-width: 1280px) {
+    .dataContainer {
+        padding-left:473px;
+        padding-right: 91px;
+        padding-bottom: 8px;
+    }
+}
