@@ -4,6 +4,7 @@
   margin: 20px auto;
   align-items: center;
   justify-content: center;
+  background: transparent;
 }
 .logo {
   background-image: url("../../assets/mobilelogo.png");
