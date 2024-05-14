@@ -1,0 +1,34 @@
+.whiteBackground {
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFFFFF;
+/* */
+
+}
+.greyBackground {
+    width: 100vw;
+    height: 65%;  
+    background-color: #F5F6FB;
+    border-radius: 0 0 0 100px;
+/* */
+}
+/* .backgroundAuth {
+display: none;
+}
+.backgroundGuest {
+display: none; 
+}   */
+
+.multiCabbage {
+background-image: url("../../assets/multiCabbage.png");
+width: 100vw;
+background-repeat:repeat-x;
+height: 232px;
+}
+.coupleCabbage {
+background-image: url("../../assets/coupleCabbage.png");
+width: 183px;
+height: 142px;
+margin-left: 230px;
+margin-top: 60px;
+}
