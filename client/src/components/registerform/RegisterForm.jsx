@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import css from "../../components/registerform/RegisterForm.module.css";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operations";
+
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const dispatch = useDispatch();
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -21,6 +25,13 @@ const RegisterForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const form = event.currentTarget;
+    const registerData = {
+      email: form.elements.email.value,
+      password: form.elements.password.value,
+    };
+    dispatch(register(registerData));
+    form.reset();
     setIsSubmitted(true);
   };
 

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import css from "../../components/loginform/LoginForm.module.css";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/auth/operations";
+
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const dispatch = useDispatch();
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -15,6 +19,13 @@ const LoginForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const form = event.currentTarget;
+    const loginData = {
+      email: form.elements.email.value,
+      password: form.elements.password.value,
+    };
+    dispatch(login(loginData));
+    form.reset();
     setIsSubmitted(true);
   };
 

@@ -5,6 +5,8 @@
   margin: 20px auto;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1001;
 }
 .logo {
   background-image: url("../../assets/mobilelogo.png");
