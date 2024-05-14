@@ -12,11 +12,11 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
         <Route
-          path="login"
+          index
           element={<PrivateRoute Component={<LoginForm />} redirecTo="/home" />}
         />
+
         <Route
           path="register"
           element={
@@ -28,7 +28,7 @@ function App() {
         />
         <Route
           path="home"
-          element={<ProtectedRoute Component={<Home />} redirecTo="/login" />}
+          element={<ProtectedRoute Component={<Home />} redirecTo="/" />}
         />
         <Route
           path="afterregister"

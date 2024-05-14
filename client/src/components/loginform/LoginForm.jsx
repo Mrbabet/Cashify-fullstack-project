@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import css from "../../components/loginform/LoginForm.module.css";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/auth/operations";
@@ -77,7 +78,9 @@ const LoginForm = () => {
               <button type="submit" className={css.active}>
                 LOG IN
               </button>
-              <button type="button">REGISTER</button>
+              <button type="button">
+                <Link to="/register">REGISTER</Link>
+              </button>
             </div>
           </form>
         </div>

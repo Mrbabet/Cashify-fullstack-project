@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import css from "../../components/registerform/RegisterForm.module.css";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
@@ -94,7 +95,9 @@ const RegisterForm = () => {
               <button type="submit" className={css.active}>
                 REGISTER
               </button>
-              <button type="button">LOGIN</button>
+              <button type="button">
+                <Link to="/">LOGIN</Link>
+              </button>
             </div>
           </form>
         </div>
