@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = `https://kapusta-backend.goit.global/`;
+axios.defaults.baseURL = `https://cashify-backend.onrender.com`;
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
@@ -25,7 +25,7 @@ const login = createAsyncThunk("auth/login", async (credentials, thunkAPI) => {
   try {
     const res = await axios.post("/auth/login", credentials);
     setAuthHeader(res.data.accessToken);
-    console.log(res.data);
+    console.log(res);
     return res.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
