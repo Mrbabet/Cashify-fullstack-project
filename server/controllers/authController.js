@@ -1,161 +1,118 @@
 const { User } = require("../models/user");
 const jwt = require("jsonwebtoken");
-const { userSchema } = require("../validation/userSchema");
 const gravatar = require("gravatar");
 const crypto = require("crypto");
 const { sendVerification } = require("../helpers/sendVerificationEmail");
 require("dotenv").config();
 
 const register = async (req, res) => {
-  const { error, value } = userSchema.validate(req.body);
+  const { email, password } = req.body;
 
-  const user = await User.findOne({ email: value.email });
-  const avatarURL = gravatar.url(value.email);
-  if (error) {
-    return res.status(401).json({ message: error.message });
-  }
+  const user = await User.findOne({ email });
+  const avatarURL = gravatar.url(email);
+
   if (user) {
     return res.status(409).json({ message: "Email in use" });
   }
 
-  try {
-    const newUser = new User({
-      email: value.email,
-      avatarURL,
-      verificationToken: crypto.randomBytes(64).toString("hex"),
-    });
-    await newUser.setPassword(value.password);
-    await newUser.save();
+  const newUser = new User({
+    email,
+    avatarURL,
+    verificationToken: crypto.randomBytes(64).toString("hex"),
+  });
+  await newUser.setPassword(password);
+  await newUser.save();
 
-    sendVerification(newUser);
+  sendVerification(newUser);
 
-    res.status(201).json({
-      user: {
-        email: newUser.email,
-        password: newUser.password,
-        avatarURL: newUser.avatarURL,
-      },
-    });
-  } catch (error) {
-    console.error("Registration error:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
+  res.status(201).json({
+    user: {
+      email: newUser.email,
+      password: newUser.password,
+      avatarURL: newUser.avatarURL,
+    },
+  });
 };
 
 const login = async (req, res) => {
-  try {
-    const { error, value } = userSchema.validate(req.body);
+  const { email, password } = req.body;
 
-    const user = await User.findOne({ email: value.email });
+  const user = await User.findOne({ email });
 
-    if (error) {
-      return res.status(400).json({ message: error.details[0].message });
-    }
+  if (!user) {
+    return res.status(401).json({ message: "Email or password is wrong" });
+  }
 
-    if (!user) {
-      return res.status(401).json({ message: "Email or password is wrong" });
-    }
+  if (!user.verify) {
+    return res.status(401).json({ message: "Not verificated" });
+  }
 
-    if (!user.verify) {
-      return res.status(401).json({ message: "Not verificated" });
-    }
+  const isPasswordCorrect = await user.validatePassword(password);
 
-    const isPasswordCorrect = await user.validatePassword(value.password);
-
-    if (isPasswordCorrect) {
-      const payload = {
+  if (isPasswordCorrect) {
+    const payload = {
+      id: user._id,
+      email: user.email,
+    };
+    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "1d",
+    });
+    const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
+      expiresIn: "7d",
+    });
+    res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
+    user.accessToken = accessToken;
+    user.refreshToken = refreshToken;
+    user.save();
+  
+    return res.status(200).send({
+      accessToken,
+      refreshToken,
+      userData: {
+        email,
+        balance: user.balance,
         id: user._id,
-        email: user.email,
-      };
-      const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "20s",
-      });
-      const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
-        expiresIn: "7d",
-      });
-
-      user.accessToken = accessToken;
-      user.refreshToken = refreshToken;
-      user.save();
-      return res.status(200).send({
-        accessToken,
-        refreshToken,
-        userData: {
-          email: user.email,
-          balance: user.balance,
-          id: user._id,
-          transactions: user.transactions,
-        },
-      });
-    } else {
-      return res.status(401).json({ message: "Wrong password" });
-    }
-  } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ message: "Internal server error" });
+      },
+    });
+  } else {
+    return res.status(401).json({ message: "Wrong password" });
   }
 };
 
 const logout = async (req, res) => {
+  const refreshToken = req.cookies?.jwt;
+
+  // Check if there is no refresh token, then return 204 No Content
+  if (!refreshToken) return res.sendStatus(204);
+
   try {
-    const userId = req.user._id;
-    const user = await User.findById(userId);
+    // Find user based on refresh token
+    const user = await User.findOne({ refreshToken });
+
+    // If user not found, clear the cookie and return 401 Unauthorized
     if (!user) {
+      res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
       return res.status(401).json({ message: "Not authorized" });
     }
 
+    // Reset user's access and refresh tokens
     user.accessToken = null;
     user.refreshToken = null;
     await user.save();
 
-    res.status(201).json({ message: "Logout successful" });
+    // Clear JWT cookie and return 200 OK
+    res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
+    return res.status(200).json({ message: "Logout successful" });
   } catch (error) {
-    console.error("Logout error:", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.error("Error during logout:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-const refreshToken = async (req, res, next) => {
-  const refreshToken = req.headers.authorization;
 
-  if (!refreshToken) {
-    return res.status(401).json({ message: "Refresh token is required" });
-  }
-  const splitToken = refreshToken.split(" ")[1];
-  jwt.verify(
-    splitToken,
-    process.env.REFRESH_TOKEN_SECRET,
-    async (err, decodedToken) => {
-      if (err) {
-        return res.status(403).json({ message: "Invalid token" });
-      }
-      const user = await User.findOne({ _id: decodedToken.id });
-      if (!user) {
-        return res.status(401).json({ message: "No such User" });
-      }
-      const payload = { id: user._id, email: user.email };
 
-      const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "20s",
-      });
-      const newRefreshToken = jwt.sign(
-        payload,
-        process.env.REFRESH_TOKEN_SECRET,
-        {
-          expiresIn: "7d",
-        }
-      );
-      res.status(201).json({
-        message: "Token refreshed",
-        accessToken,
-        refreshToken: newRefreshToken,
-      });
-    }
-  );
-};
 
 module.exports = {
   login,
   register,
   logout,
-  refreshToken,
 };
