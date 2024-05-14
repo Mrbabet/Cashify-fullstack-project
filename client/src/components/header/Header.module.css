@@ -3,17 +3,33 @@
   width: 100vw;
   height: 56px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
-.header {
-  display: flex;
-}
-.headerlogo {
+.headerLogo {
   background-image: url("../../assets/headerlogo.png");
   background-size: cover;
   height: 30px;
   width: 90px;
   display: flex;
   align-items: center;
-  margin-left: 20px;
+  margin: 13px auto 13px 10px;
+}
+.userLogout {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.logout {
+  background-image: url("../../assets/logout1.png");
+  background-size: cover;
+  height: 16px;
+  width: 16px;
+}
+@media screen and (min-width: 768px) {
+  .logout {
+    display: none;
+  }
 }
