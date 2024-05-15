@@ -1,0 +1,29 @@
+.messageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 1001;
+  position: absolute;
+}
+.message {
+  text-align: center;
+  justify-content: ;
+  background-color: white;
+  border-radius: 30px;
+  font-size: 15px;
+  min-width: 250px;
+  padding: 30px 5px 30px 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .message {
+    scale: 1.5;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .message {
+    scale: 1.7;
+  }
+}
