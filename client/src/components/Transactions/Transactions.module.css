@@ -1,0 +1,224 @@
+.transactionsCalendar {
+    display: none;
+}
+.transactionsReturn {
+    align-self: flex-start;
+    margin-bottom: 18px;
+    width: 24px;
+}
+.transactionsInterface {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.calendarIcon {
+    width: 20px;
+    height: 20px;
+    align-self: center;
+}
+.transactionsSection {
+    box-sizing: border-box;
+        padding: 56px 20px 0;
+
+}
+
+.transactionsForm {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selectPlaceholder {
+    color: #C7CCDC;
+    background-color: black;
+}
+
+.transactionsInputContainer {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    min-width: 280px;
+    align-self: center;
+}
+
+.transactionsInput {
+    box-sizing: border-box;
+    align-items: center;
+    padding-left: 20px;
+    border: 2px solid #FFF;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    width: 100%;
+    height: 44px;
+    color: #C7CCDC;
+    background-color: transparent;
+    font-family: "Roboto", sans-serif;
+}
+
+.transactionsInput::placeholder {
+    color:#C7CCDC;
+}
+
+.transactionsSelect{
+    box-sizing: border-box;
+    margin:0;
+    padding-left: 20px;
+    width: 100%;
+    height: 44px;
+    color: #C7CCDC;
+    border: 2px solid #FFF;
+    border-top: 1px;
+    border-bottom-right-radius: 16px;
+    background-color: transparent;
+    font-family: "Roboto", sans-serif;
+}
+
+.transactionsCalcContainer {
+    display: flex;
+    justify-content: center;
+    width: 185px;
+    margin-top: 32px;
+    
+}
+
+.transactionsCalcInput {
+    box-sizing: border-box;
+    text-align:right; 
+    padding-right: 16px;
+    border: 2px solid #FFF;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    height: 44px;
+    width: 120px;
+    color: #C7CCDC;
+    background-color: transparent;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.transactionsCalcInput::placeholder {
+    color: #000
+}
+
+.transactionsIcon {
+    display: flex;
+    border: 2px solid #FFF;
+    border-left: 1px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    padding: 0 20px;
+    
+}
+.transactionsActions {
+   display: flex;
+   margin-top: 80px;
+   gap: 20px;
+}
+
+.transactionsActionsButton {
+    width: 130px;
+    height: 44px;
+    border: 0;
+    font-weight: bold;
+    background-color: #F5F6FB;
+    color: #52555F;
+    border-radius: 16px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+
+
+}
+
+.transactionsActionsButton:hover {
+    color: #FFF;
+    background-color: #FF751D;
+}
+
+@media screen and (min-width: 768px) {
+    .transactionsSection {
+        margin: 0 32px;
+        padding: 24px 40px 48px;
+        background-color: #FFF;
+        border-top-right-radius: 30px;
+    }
+    .transactionsReturn {
+        display: none;
+    }
+    .transactionsCalendar {
+    display: flex;
+    justify-content: center;
+    gap:8px;
+    }
+    
+    .transactionsDate {
+    border: none;
+    background: none;
+    color: #52555F;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    }
+
+    .transactionsInputContainer {
+        flex-direction: row;
+        justify-content: right;
+    }
+
+    .transactionsInterface {
+        flex-direction: row;
+    }
+    .transactionsCalcContainer {
+        margin-top: 0;
+        
+    }
+    .transactionsCalendar {
+        margin-right: 44px;
+        width: 100px;
+    }
+    .transactionsInput {
+        width: 159px;
+        height: 44px;
+        border-top-right-radius: 0;
+        border: 2px solid #F5F6FB;
+    }
+    .transactionsSelect {
+        width: 186px;
+        height: 44px;
+        border-radius: 0;
+        border: 2px solid #F5F6FB;
+        border-left: 1px;
+        border-right: 1px;
+    }
+    .transactionsCalcInput {
+        padding-top: 0;
+        padding-bottom: 0;
+        border-color: #F5F6FB;
+        border-radius: 0;
+    }
+    .transactionsIcon {
+        border-color: #F5F6FB;
+    }
+    .transactionsActions {
+        margin-top: 32px;
+    }
+}
+@media screen and (min-width: 1280px) {
+    .transactionsSection {
+        margin: 0 98px;  
+        min-width: 1098px;      
+        display: flex;
+        
+        padding-bottom: 60px;
+        
+        justify-content: center;
+    }
+    
+    .transactionsForm {
+        flex-direction: row;
+    }
+    .transactionsActions {
+        margin-top: 0;
+        margin-left: 48px;
+    }
+
+}
