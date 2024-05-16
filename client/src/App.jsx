@@ -7,6 +7,7 @@ import AfterRegister from "./components/afterRegister/AfterRegister.jsx";
 import PrivateRoute from "./components/PrivateRoute";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AfterRegisterRoute from "./components/AfterRegisterRoute";
+import Balance from "./components/Balance/Balance.jsx";
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
               redirecTo="/register"
             />
           }
+        />
+        <Route
+          path="balance"
+          element={<Balance />}
         />
       </Route>
     </Routes>

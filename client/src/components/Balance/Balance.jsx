@@ -1,4 +1,5 @@
 import css from "./Balance.module.css"
+import BalancePop from "../balancePop/BalancePop.jsx"
 
 const Balance = () => {
 
@@ -18,7 +19,8 @@ const Balance = () => {
                 </div>
                 </form>
             </div>   
-            </div>    
+            </div>  
+            {<BalancePop  />}  
         </section>
     )
 }
