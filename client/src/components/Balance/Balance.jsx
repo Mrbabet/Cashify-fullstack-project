@@ -1,5 +1,5 @@
 import css from "./Balance.module.css"
-import BalancePop from "../balancePopUp/BalancePop.jsx"
+import BalancePop from "../balancePop/BalancePop.jsx"
 
 const Balance = () => {
 

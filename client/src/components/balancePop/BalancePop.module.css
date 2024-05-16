@@ -2,8 +2,8 @@
   width: 288px;
   height: 163px;
   position: relative;
-  top: -50px;
-  left: 150px;
+  top: -17px;
+  left: -2px;
 
 }
 
@@ -31,4 +31,19 @@
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
     border-bottom: 20px solid rgba(29, 52, 106, 1);
+}
+
+@media screen and (min-width: 768px) {
+  .popupContainer {
+    top: -33px;
+    left: 129px;
+   }
+}
+
+@media screen and (min-width: 1280px) {
+  .popupContainer {
+    top: 15px;
+    left: 569px;
+    
+  }
 }
