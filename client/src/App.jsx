@@ -12,7 +12,7 @@ import Balance from "./components/Balance/Balance.jsx";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout isAuthenticated={false} />}>
+      <Route path="/" element={<Layout isAuthenticated={true} />}>
         <Route
           index
           element={<PrivateRoute Component={<LoginForm />} redirecTo="/home" />}
