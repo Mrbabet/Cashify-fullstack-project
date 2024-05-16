@@ -12,7 +12,7 @@ import Balance from "./components/Balance/Balance.jsx";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout isAuthenticated={false} />}>
         <Route
           index
           element={<PrivateRoute Component={<LoginForm />} redirecTo="/home" />}
@@ -40,10 +40,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="balance"
-          element={<Balance />}
-        />
+        <Route path="balance" element={<Balance />} />
       </Route>
     </Routes>
   );
