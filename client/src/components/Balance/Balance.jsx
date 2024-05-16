@@ -1,7 +1,21 @@
-import css from "./Balance.module.css"
-import BalancePop from "../balancePop/BalancePop.jsx"
+// import { useState } from 'react';
+import css from "./Balance.module.css";
+import BalancePop from "../balancePop/BalancePop.jsx";
+// import BalanceButton from '../ballanceButtonLogic/BalanceButtonLogic.jsx';
 
 const Balance = () => {
+    /*const [balanceValue, setBalanceValue] = useState('0.00');
+    
+    const handleUpdateBalance = () => {
+        console.log('balance updated.');
+    };
+
+    const handleBalanceChange = (event) => {
+        setBalanceValue(event.target.value);  
+    }; */
+
+    // LOGIKA WYMAGA TYLKO PODPIĘCIA DO BUTTONA
+
 
     return (
         <section className={css.balanceSection}>
