@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: "/",
   server: {
-    // Handle fallback for history API routing
+    port: 3000,
     historyApiFallback: true,
   },
 });
