@@ -1,49 +1,62 @@
-import Layout from "./components/Layout/Layout";
-import LoginForm from "./components/loginform/LoginForm";
-import RegisterForm from "./components/registerform/RegisterForm";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import AfterRegister from "./components/afterRegister/AfterRegister.jsx";
-import PrivateRoute from "./components/PrivateRoute";
-import ProtectedRoute from "./components/ProtectedRoute";
-import AfterRegisterRoute from "./components/AfterRegisterRoute";
-import Balance from "./components/Balance/Balance.jsx";
+import { Suspense, lazy, useEffect } from "react";
+const Welcome = lazy(() =>
+  import("./pages/AuthenticationPage/AuthenticationPage")
+);
+const Home = lazy(() => import("./pages/Home"));
+const Reports = lazy(() => import("./pages/Reports"));
+import Layout from "./components/Layout/Layout";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
+import React from "react";
+import AuthenticationPage from "./pages/AuthenticationPage/AuthenticationPage";
+import { useDispatch } from "react-redux";
+import { useAuth } from "./hooks/useAuth";
+import { refreshUser } from "./redux/auth/operations";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  const { isRefreshing } = useAuth();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
   return (
-    <Routes>
-      <Route path="/" element={<Layout isAuthenticated={true} />}>
-        <Route
-          index
-          element={<PrivateRoute Component={<LoginForm />} redirecTo="/home" />}
-        />
+    <>
+      {isRefreshing && <div>Fetching user data</div>}
+      {!isRefreshing && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route
+                path="/"
+                element={
+                  <PrivateRoute component={<Home />} redirectTo="/welcome" />
+                }
+              />
 
-        <Route
-          path="register"
-          element={
-            <AfterRegisterRoute
-              Component={<RegisterForm />}
-              redirecTo="/afterregister"
-            />
-          }
-        />
-        <Route
-          path="home"
-          element={<ProtectedRoute Component={<Home />} redirecTo="/" />}
-        />
-        <Route
-          path="afterregister"
-          element={
-            <ProtectedRoute
-              Component={<AfterRegister />}
-              redirecTo="/register"
-            />
-          }
-        />
-        <Route path="balance" element={<Balance />} />
-      </Route>
-    </Routes>
+              <Route
+                path="welcome"
+                element={
+                  <RestrictedRoute
+                    component={<AuthenticationPage />}
+                    redirectTo="/"
+                  />
+                }
+              />
+
+              <Route
+                path="reports"
+                element={
+                  <PrivateRoute component={<Reports />} redirectTo="/welcome" />
+                }
+              />
+            </Route>
+          </Routes>
+        </Suspense>
+      )}
+    </>
   );
-}
+};
 
 export default App;
