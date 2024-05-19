@@ -1,8 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Suspense, lazy, useEffect } from "react";
-const Welcome = lazy(() =>
-  import("./pages/AuthenticationPage/AuthenticationPage")
-);
+
 const Home = lazy(() => import("./pages/Home"));
 const Reports = lazy(() => import("./pages/Reports"));
 import Layout from "./components/Layout/Layout";
@@ -13,6 +11,7 @@ import AuthenticationPage from "./pages/AuthenticationPage/AuthenticationPage";
 import { useDispatch } from "react-redux";
 import { useAuth } from "./hooks/useAuth";
 import { refreshUser } from "./redux/auth/operations";
+import afterRegistration from "./components/AfterRegistration/AfterRegistration";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -44,6 +43,7 @@ const App = () => {
                   />
                 }
               />
+              <Route path="afterregister" element={<afterRegistration />} />
 
               <Route
                 path="reports"

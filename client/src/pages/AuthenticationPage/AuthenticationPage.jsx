@@ -14,9 +14,11 @@ import {
   Input,
   FormLabel,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const AuthenticationPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +30,10 @@ const AuthenticationPage = () => {
       dispatch(loginUser({ email: userEmail, password: password }));
     } else if (action === "register") {
       dispatch(createUser({ email: userEmail, password: password }));
+      navigate("/afterregister");
+      setTimeout(() => {
+        navigate(-1);
+      }, 3000);
     }
 
     setUserEmail("");
