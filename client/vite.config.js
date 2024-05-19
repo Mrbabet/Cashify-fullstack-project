@@ -9,9 +9,4 @@ export default defineConfig({
     // Handle fallback for history API routing
     historyApiFallback: true,
   },
-  build: {
-    rollupOptions: {
-      external: ["redux-persist/integration/react"],
-    },
-  },
 });
