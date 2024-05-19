@@ -4,7 +4,7 @@ const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const PORT = process.env.CLIENT_URL || 8000;
+const PORT = 8000;
 const DB_HOST = process.env.DB_HOST;
 const authRouter = require("./routes/auth.js");
 const usersRouter = require("./routes/users");

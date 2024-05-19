@@ -1,15 +1,17 @@
 const { User } = require("../models/user");
 
 const getCurrent = async (req, res) => {
-  const { email } = req.user;
+  const { email, balance, _id: id } = req.user;
 
   res.status(200).json({
     email,
+    balance,
+    id,
   });
 };
 const updateUserBalance = async (req, res) => {
   const userId = req.user._id;
-  const { newBalance } = req.body;
+  const { balance } = req.body;
 
   const user = await User.findById(userId);
 
@@ -17,11 +19,11 @@ const updateUserBalance = async (req, res) => {
     return res.status(404).json({ message: "User not found" });
   }
 
-  user.balance = newBalance;
+  user.balance = balance;
 
   await user.save();
 
-  return res.status(200).send({ newBalance });
+  return res.status(200).send({ balance });
 };
 
 module.exports = { getCurrent, updateUserBalance };
