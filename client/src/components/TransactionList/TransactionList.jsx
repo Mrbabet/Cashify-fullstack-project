@@ -141,8 +141,17 @@ const TransactionList = ({ transactionType }) => {
                   py={3}
                   textTransform="uppercase"
                 >
+                  Category
+                </Th>
+                <Th
+                  textAlign={"center"}
+                  px={2}
+                  py={3}
+                  textTransform="uppercase"
+                >
                   Sum
                 </Th>
+               
                 <Th
                   textAlign={"center"}
                   px={2}
@@ -170,12 +179,19 @@ const TransactionList = ({ transactionType }) => {
                   >
                     {new Date(transaction?.date).toLocaleDateString()}
                   </Td>
+                  
                   <Td
                     textAlign={"center"}
                     borderColor="gray.200"
                     borderBottomWidth="2px"
                   >
                     {transaction?.description}
+                  </Td>
+                  <Td  textAlign={"center"}
+                    borderColor="gray.200"
+                    borderBottomWidth="2px">
+                      {transaction?.category}
+
                   </Td>
                   <Td
                     borderColor="gray.200"
@@ -190,6 +206,7 @@ const TransactionList = ({ transactionType }) => {
                       ? `+ ${transaction?.amount} EUR`
                       : `- ${transaction?.amount} EUR`}
                   </Td>
+                 
                   <Td
                     borderColor="gray.200"
                     borderBottomWidth="2px"
