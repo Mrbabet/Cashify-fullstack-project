@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Flex, Grid, useBreakpointValue } from "@chakra-ui/react";
-import { selectPeriodData } from "../../redux/transactions/selectors";
+import { selectActiveCategory, selectPeriodData } from "../../redux/transactions/selectors";
 import CategoryCard from "../CategoryCard/CategoryCard";
 
 import Salary from "../CategoriesIcons/Salary";
@@ -12,6 +12,7 @@ import { setActiveCategory } from "../../redux/transactions/slice";
 const IncomeReport = () => {
   const isMobile = useBreakpointValue({ base: true, sm: false });
   const periodData = useSelector(selectPeriodData);
+  const activeCategory = useSelector(selectActiveCategory)
   const dispatch = useDispatch();
 
   const handleCategoryClick = (category) => {
@@ -50,6 +51,7 @@ const IncomeReport = () => {
                 Icon={data.Icon}
                 category1={data.category1}
                 onClick={() => handleCategoryClick(data.category1)}
+                isActive={ activeCategory=== data.category1}
               />
             ))}
           </Grid>
@@ -64,6 +66,7 @@ const IncomeReport = () => {
               category1={data.category1}
               category2={data.category2}
               onClick={() => handleCategoryClick(data.category1)}
+              isActive={ activeCategory=== data.category1}
             />
           ))}
         </Flex>

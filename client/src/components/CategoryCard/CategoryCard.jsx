@@ -1,5 +1,6 @@
-import { useState } from "react";
 import { Box, Flex, Text, Icon as ChakraIcon } from "@chakra-ui/react";
+
+
 
 const CategoryCard = ({
   amount,
@@ -9,6 +10,8 @@ const CategoryCard = ({
   isActive,
   onClick,
 }) => {
+
+  
   return (
     <Flex direction="column" align="center" p={2} onClick={onClick}>
       <Text fontSize="xs" color="gray.700">

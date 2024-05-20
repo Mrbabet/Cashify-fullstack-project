@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Flex, Grid, useBreakpointValue } from "@chakra-ui/react";
-import { selectPeriodData } from "../../redux/transactions/selectors";
+import { selectActiveCategory, selectPeriodData } from "../../redux/transactions/selectors";
 import CategoryCard from "../CategoryCard/CategoryCard";
 
 import Alcohol from "../CategoriesIcons/Alcohol";
@@ -17,9 +17,15 @@ import Hobbies from "../CategoriesIcons/Hobbies";
 import Communal from "../CategoriesIcons/Communal";
 import { setActiveCategory } from "../../redux/transactions/slice";
 
+
 const ExpensesReport = () => {
   const isMobile = useBreakpointValue({ base: true, sm: false });
   const periodData = useSelector(selectPeriodData);
+  const activeCategory = useSelector(selectActiveCategory)
+
+  console.log(activeCategory)
+  
+  
 
   const dispatch = useDispatch();
   const handleCategoryClick = (category) => {
@@ -110,6 +116,8 @@ const ExpensesReport = () => {
                     category1={data.category1}
                     category2={data.category2}
                     onClick={() => handleCategoryClick(data.category1)}
+                    isActive={ activeCategory=== data.category1}
+                    
                   />
                 ))}
             </Grid>
@@ -125,6 +133,7 @@ const ExpensesReport = () => {
               category1={data.category1}
               category2={data.category2}
               onClick={() => handleCategoryClick(data.category1)}
+              isActive={ activeCategory=== data.category1}
             />
           ))}
         </Flex>
