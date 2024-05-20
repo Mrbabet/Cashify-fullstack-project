@@ -9,6 +9,7 @@ import {
   getExpenseCategories,
   updateUserBalance,
   getPeriodData,
+  getUserBalance,
 } from "./operations";
 import { refreshUser } from "../auth/operations";
 
@@ -67,6 +68,7 @@ const transactionsSlice = createSlice({
       .addCase(getIncomeStats.fulfilled, (state, action) => {
         state.loading = false;
         state.incomeStats = action.payload;
+        state.balance = action.payload.balance;
       })
       .addCase(getIncomeStats.rejected, (state, action) => {
         state.loading = false;
@@ -79,7 +81,7 @@ const transactionsSlice = createSlice({
       })
       .addCase(addExpense.fulfilled, (state, action) => {
         state.loading = false;
-        state.balance = action.payload.newBalance;
+        state.balance = action.payload.balance;
         state.additionalData = action.payload.additionalData;
         if (!state.expenseStats.expenses) {
           state.expenseStats.expenses = [];
@@ -98,6 +100,7 @@ const transactionsSlice = createSlice({
       .addCase(getExpenseStats.fulfilled, (state, action) => {
         state.loading = false;
         state.expenseStats = action.payload;
+        state.balance = action.payload.balance;
       })
       .addCase(getExpenseStats.rejected, (state, action) => {
         state.loading = false;
@@ -170,21 +173,28 @@ const transactionsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Update User Balance
+
       .addCase(updateUserBalance.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(updateUserBalance.fulfilled, (state, action) => {
         state.loading = false;
-        state.balance = action.payload.newBalance;
+        state.balance = action.payload.balance;
       })
       .addCase(updateUserBalance.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
+      .addCase(getUserBalance.pending, (state, action) => {
+        state.loading = true;
+        state.balance = action.payload.balance;
+      })
+      .addCase(getUserBalance.fulfilled, (state, action) => {
+        state.loading = false;
+        state.balance = action.payload.balance;
+      })
       .addCase(getPeriodData.fulfilled, (state, action) => {
-        // Update state with fetched data
         state.periodData = action.payload;
       });
   },

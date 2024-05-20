@@ -8,27 +8,24 @@ import {
 } from "@chakra-ui/react";
 import Balance from "../components/Balance/Balance";
 
-import { useEffect, useState } from "react";
 import TransactionManager from "../components/TransactionManager/TransactionManager";
 import reportsIcon from "../assets/bar_chart-24px 1.svg";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getUserBalance } from "../redux/transactions/operations";
 
 const Home = () => {
-  const [startDate, setStartDate] = useState(() => {
-    const today = new Date();
-    return today.toISOString().split("T")[0];
-  });
-
-  const handleDateChange = (event) => {
-    setStartDate(event.target.value);
-  };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUserBalance());
+  }, [dispatch]);
 
   const flexDirection = useBreakpointValue({
     base: "column",
     md: "row-reverse",
   });
 
-  const isMobile = useBreakpointValue({ base: true, md: false });
   const marginBottom = useBreakpointValue({
     base: "32px",
     md: "none",
@@ -39,7 +36,7 @@ const Home = () => {
       <Box
         m={"0 auto"}
         maxW={["100%", "100%", "768px", "992px", "1280px"]}
-        paddingInline={["20px", "32px", "32px",'90px']}
+        paddingInline={["20px", "32px", "32px", "90px"]}
       >
         <Flex
           pt={["20px", "32px"]}
@@ -57,7 +54,6 @@ const Home = () => {
               <Image src={reportsIcon} />
             </Flex>
           </Link>
-
           <Balance />
         </Flex>
         <TransactionManager />
