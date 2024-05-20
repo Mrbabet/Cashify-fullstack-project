@@ -11,7 +11,7 @@ import AuthenticationPage from "./pages/AuthenticationPage/AuthenticationPage";
 import { useDispatch } from "react-redux";
 import { useAuth } from "./hooks/useAuth";
 import { refreshUser } from "./redux/auth/operations";
-import afterRegistration from "./components/AfterRegistration/AfterRegistration";
+import AfterRegistration from "./components/AfterRegistration/AfterRegistration";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ const App = () => {
                   />
                 }
               />
-              <Route path="afterregister" element={<afterRegistration />} />
+              <Route path="afterregister" element={<AfterRegistration />} />
 
               <Route
                 path="reports"

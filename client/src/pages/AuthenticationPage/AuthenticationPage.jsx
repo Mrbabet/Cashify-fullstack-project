@@ -31,9 +31,6 @@ const AuthenticationPage = () => {
     } else if (action === "register") {
       dispatch(createUser({ email: userEmail, password: password }));
       navigate("/afterregister");
-      setTimeout(() => {
-        navigate(-1);
-      }, 3000);
     }
 
     setUserEmail("");
