@@ -58,28 +58,32 @@ const TransactionList = ({ transactionType }) => {
     <Box
       position="relative"
       overflowX="auto"
-      width={{ base: "100%", md: "full", lg: "4/5" }}
+      width={{ base: "100%", md: "full"}}
       fontSize="xs"
     >
       {isMobile ? (
-        <Box maxHeight="200px" overflowY="scroll">
+        <Box >
           {transactions?.map((transaction) => (
             <Flex
               key={transaction?.transactionId}
               bg="white"
               borderBottom={"1px solid gray"}
-              mb={2}
-              pb={"8px"}
+            
+              paddingBlock={"16px"}
               alignItems="center"
               justifyContent="space-between"
             >
               <Flex flexBasis="40%" flexDirection={"column"}>
+              <Text>{transaction?.description}</Text>
+
+              <Flex gap={4}> 
                 <Text>
-                  {" "}
-                  {new Date(transaction?.date).toLocaleDateString()}{" "}
-                </Text>
-                <Text>{transaction?.description}</Text>
-                <Text>{transaction?.category}</Text>
+                
+                {new Date(transaction?.date).toLocaleDateString()}{" "}
+              </Text>
+              
+              <Text>{transaction?.category}</Text></Flex>
+               
               </Flex>
               <Box flexBasis="40%">
                 <Text

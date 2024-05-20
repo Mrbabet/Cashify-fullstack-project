@@ -39,7 +39,7 @@ const Home = () => {
       <Box
         m={"0 auto"}
         maxW={["100%", "100%", "768px", "992px", "1280px"]}
-        paddingInline={["20px", "32px", "90px"]}
+        paddingInline={["20px", "32px", "32px",'90px']}
       >
         <Flex
           pt={["20px", "32px"]}
@@ -59,19 +59,6 @@ const Home = () => {
           </Link>
 
           <Balance />
-
-          {isMobile && (
-            <Flex justifyContent={"center"}>
-              <Input
-                value={startDate}
-                onChange={handleDateChange}
-                type="date"
-                mt={4}
-                variant={"unstyled"}
-                w={"110px"}
-              />
-            </Flex>
-          )}
         </Flex>
         <TransactionManager />
       </Box>

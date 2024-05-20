@@ -106,13 +106,18 @@ const TransactionInputs = ({ transactionType }) => {
         gap={3}
         p={4}
       >
-        <Stack direction={{ base: "column", md: "row" }} spacing={3} flex="1">
+        <Stack w={'100%'} alignItems={'center'} direction={{ base: "column", md: "row" }} spacing={[0]} flex="1">
           <Input
             h="44px"
+            w={'100%'}
+            maxW={['110px','110px','110px']}
+            
+            marginRight={[0,0,'40px']}
             name="date"
             value={form?.date}
             onChange={handleChange}
             type="date"
+            variant={'unstyled'}
             required
           />
           <Input
@@ -121,6 +126,8 @@ const TransactionInputs = ({ transactionType }) => {
             placeholder="Product description"
             value={form?.description}
             onChange={handleChange}
+            borderRadius={['20px 0 0 0','20px 0px 0 0']}
+          
           />
           <Select
             h="44px"
@@ -128,6 +135,8 @@ const TransactionInputs = ({ transactionType }) => {
             placeholder="Product category"
             value={form?.category}
             onChange={handleChange}
+            borderRadius={['0 0 20px 0','0 0 20px 0','none']}
+            mb={['32px','32px',0]}
           >
             {categories.map((category) => (
               <option key={category} value={category}>
@@ -137,11 +146,16 @@ const TransactionInputs = ({ transactionType }) => {
           </Select>
           <Input
             h="44px"
+            w={'100%'}
+            maxW={['200px','200px','110px']}
+            m={['0 auto', '0 auto', 0, 0]}
             name="amount"
             placeholder="0.00"
             value={form.amount}
             onChange={handleChange}
             type="number"
+            borderRadius={['10px','10px','0px 50px 50px 0px']}
+            
           />
         </Stack>
         <Stack
