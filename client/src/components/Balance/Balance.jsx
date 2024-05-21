@@ -6,18 +6,27 @@ import {
   Flex,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserBalance } from "../../redux/transactions/operations";
+import { selectBalance } from "../../redux/transactions/selectors";
 
 const Balance = () => {
   const { user } = useAuth();
-  const [balance, setBalance] = useState(user.balance);
   const dispatch = useDispatch();
   const flexDirection = useBreakpointValue({ base: "column", md: "row" });
   const inputButtonWidth = useBreakpointValue({ base: "100%", md: "auto" });
-  const isWideScreen = useBreakpointValue({ base: false, md: true });
+
+  const currentBalance = useSelector(selectBalance);
+  const [balance, setBalance] = useState(user.balance);
+
+  // Sync local balance state with Redux store balance
+  useEffect(() => {
+    setBalance(currentBalance);
+  }, [currentBalance]);
+
+  console.log(currentBalance);
 
   const handleChange = (e) => {
     setBalance(e.target.value);
@@ -25,7 +34,7 @@ const Balance = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUserBalance(Number(balance)));
+    dispatch(updateUserBalance(Number(balance))); // Use local balance state
   };
 
   return (

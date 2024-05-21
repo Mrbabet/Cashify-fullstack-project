@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { useAuth } from "./hooks/useAuth";
 import { refreshUser } from "./redux/auth/operations";
 import AfterRegistration from "./components/AfterRegistration/AfterRegistration";
+import { getUserBalance } from "./redux/transactions/operations";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(refreshUser());
+    dispatch(getUserBalance())
   }, [dispatch]);
   return (
     <>

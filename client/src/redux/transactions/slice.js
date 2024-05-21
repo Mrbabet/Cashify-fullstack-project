@@ -188,11 +188,11 @@ const transactionsSlice = createSlice({
       })
       .addCase(getUserBalance.pending, (state, action) => {
         state.loading = true;
-        state.balance = action.payload.balance;
+        state.error = null;
       })
       .addCase(getUserBalance.fulfilled, (state, action) => {
         state.loading = false;
-        state.balance = action.payload.balance;
+        state.balance = action.payload.balance
       })
       .addCase(getPeriodData.fulfilled, (state, action) => {
         state.periodData = action.payload;

@@ -15,11 +15,13 @@ import {
   getExpenseStats,
   getIncomeCategories,
   getIncomeStats,
+  getUserBalance,
 } from "../../redux/transactions/operations";
 import { useDispatch, useSelector } from "react-redux";
 
 const TransactionInputs = ({ transactionType }) => {
   const dispatch = useDispatch();
+  
   const categories = useSelector((state) =>
     transactionType === "income"
       ? state.transactions.incomeCategories
@@ -67,10 +69,12 @@ const TransactionInputs = ({ transactionType }) => {
     if (transactionType === "income") {
       dispatch(addIncome(formData)).then(() => {
         dispatch(getIncomeStats());
+        dispatch(getUserBalance())
       });
     } else {
       dispatch(addExpense(formData)).then(() => {
         dispatch(getExpenseStats());
+        dispatch(getUserBalance())
       });
     }
     handleClear();
