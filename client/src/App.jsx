@@ -20,12 +20,8 @@ const App = () => {
   
 
   useEffect(() => {
-   
       dispatch(refreshUser());
       dispatch(getUserBalance())
-    
-    
-  
   }, [dispatch]);
   return (
     <>

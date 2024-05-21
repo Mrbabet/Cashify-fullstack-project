@@ -11,7 +11,7 @@ export const selectError = (state) => state.transactions.error;
 export const selectActiveCategory = (state) =>
   state.transactions.activeCategory;
 
-export const selectBalance =  createSelector((state) => state?.transactions, (transactions)=>transactions?.balance)
+export const selectBalance =  createSelector((state) => state.transactions, (transactions)=>transactions.balance)
 
 export const selectIncomeStats = createSelector(
   (state) => state.transactions,

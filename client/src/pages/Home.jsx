@@ -18,7 +18,6 @@ import { selectLoginCount } from "../redux/auth/selectors";
 const Home = () => {
   const dispatch = useDispatch();
 
-
   useEffect(() => {
    
      dispatch(getUserBalance());

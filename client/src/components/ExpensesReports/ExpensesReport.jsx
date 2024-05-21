@@ -23,7 +23,7 @@ const ExpensesReport = () => {
   const periodData = useSelector(selectPeriodData);
   const activeCategory = useSelector(selectActiveCategory)
 
-  console.log(activeCategory)
+
   
   
 

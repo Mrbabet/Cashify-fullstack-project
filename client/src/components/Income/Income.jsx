@@ -1,6 +1,5 @@
 import React from "react";
 import TransactionInputs from "../TransactionInputs/TransactionInputs";
-
 import { Flex, useBreakpointValue } from "@chakra-ui/react";
 import TransactionList from "../TransactionList/TransactionList";
 import MonthSummary from "../MonthSummary/MonthSummary";

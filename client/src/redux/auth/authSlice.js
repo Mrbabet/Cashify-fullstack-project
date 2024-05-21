@@ -7,7 +7,7 @@ import {
 } from "./operations.js";
 
 const initialState = {
-  user: { email: null, balance: null, id: null },
+  user: { email: null, balance: null, id: null, loginCount: 0 },
   loading: false,
   isLoggedIn: false,
   isRefreshing: false,
@@ -15,7 +15,7 @@ const initialState = {
   error: null,
   accessToken: null,
   refreshToken: null,
-  loginCount: 0
+  
 };
 const handlePending = (state) => {
   state.loading = true;
