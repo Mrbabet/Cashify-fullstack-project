@@ -1,13 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  loginUser,
-  logoutUser,
-  createUser,
-  refreshUser,
-} from "./operations.js";
+import { login, logout, register, refreshToken } from "./operations.js";
 
 const initialState = {
-  user: { email: null, balance: null, id: null },
   loading: false,
   isLoggedIn: false,
   isRefreshing: false,
@@ -15,7 +9,11 @@ const initialState = {
   error: null,
   accessToken: null,
   refreshToken: null,
+  id: null,
+  balance: null,
+  email: null,
 };
+
 const handlePending = (state) => {
   state.loading = true;
 };
@@ -35,29 +33,32 @@ const authSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(createUser.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
         state.id = action.payload.id;
         state.isRegistered = true;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         state.isLoggedIn = true;
         state.accessToken = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
-        state.user = action.payload.user;
+        state.balance = action.payload.userData.balance;
+        state.email = action.payload.userData.email;
+        state.id = action.payload.userData.id;
+        state.transactions = action.payload.userData.transactions;
       })
-      .addCase(logoutUser.fulfilled, () => initialState)
-      .addCase(refreshUser.pending, (state, action) => {
+      .addCase(logout.fulfilled, () => initialState)
+      .addCase(refreshToken.fulfilled, (state, action) => {
+        state.loading = false;
+        state.accessToken = action.payload.accessToken;
+      })
+      .addCase(refreshToken.pending, (state) => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUser.fulfilled, (state, action) => {
-        state.isLoggedIn = true;
+      .addCase(refreshToken.rejected, (state, action) => {
         state.isRefreshing = false;
-        state.user = action.payload;
-      })
-      .addCase(refreshUser.rejected, (state) => {
-        state.isRefreshing = false;
+        state.error = action.payload;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected);

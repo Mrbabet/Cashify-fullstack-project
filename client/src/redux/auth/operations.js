@@ -24,16 +24,23 @@ export const createUser = createAsyncThunk(
     }
   }
 );
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { setAuthHeader } from '../../utils/auth';
+
 export const loginUser = createAsyncThunk(
-  "auth/login",
+  'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("auth/login", credentials,{withCredentials:true});
+      const res = await axios.post('auth/login', credentials, { withCredentials: true });
 
-      const { accessToken} = res.data;
+      const { accessToken } = res.data;
 
+      // Set the access token in the authorization header
       setAuthHeader(accessToken);
-     
+
+      // Dispatch action to set access token in Redux store
+      thunkAPI.dispatch({ type: 'auth/setAccessToken', payload: accessToken });
 
       return res.data;
     } catch (error) {
