@@ -30,10 +30,10 @@ export const loginUser = createAsyncThunk(
     try {
       const res = await axios.post("auth/login", credentials);
 
-      const { accessToken, refreshToken } = res.data;
+      const { accessToken} = res.data;
 
       setAuthHeader(accessToken);
-      document.cookie = `refreshToken=${refreshToken}; SameSite=Strict; Secure`;
+     
 
       return res.data;
     } catch (error) {
