@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// axios.defaults.baseURL = `https://cashify-backend.onrender.com/`;
-axios.defaults.baseURL = `http://localhost:8000/`;
+axios.defaults.baseURL = `https://cashify-backend.onrender.com/`;
+// axios.defaults.baseURL = `http://localhost:8000/`;
 
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -28,7 +28,7 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("auth/login", credentials);
+      const res = await axios.post("auth/login", credentials,{withCredentials:true});
 
       const { accessToken} = res.data;
 
