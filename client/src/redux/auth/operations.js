@@ -24,20 +24,16 @@ export const createUser = createAsyncThunk(
     }
   }
 );
-
 export const loginUser = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post('auth/login', credentials, { withCredentials: true });
+      const res = await axios.post("auth/login", credentials,{withCredentials:true});
 
-      const { accessToken } = res.data;
+      const { accessToken} = res.data;
 
-      // Set the access token in the authorization header
       setAuthHeader(accessToken);
-
-      // Dispatch action to set access token in Redux store
-      thunkAPI.dispatch({ type: 'auth/setAccessToken', payload: accessToken });
+     
 
       return res.data;
     } catch (error) {
@@ -58,7 +54,13 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-
+const getRefreshTokenFromCookie = () => {
+  const cookieValue = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("refreshToken="))
+    ?.split("=")[1];
+  return cookieValue;
+};
 
 export const refreshUser = createAsyncThunk(
   "auth/refresh",

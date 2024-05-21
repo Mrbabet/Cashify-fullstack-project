@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, logoutUser, createUser, refreshUser } from "./operations.js";
+import {
+  loginUser,
+  logoutUser,
+  createUser,
+  refreshUser,
+} from "./operations.js";
 
 const initialState = {
+  user: { email: null, balance: null, id: null },
   loading: false,
   isLoggedIn: false,
   isRefreshing: false,
@@ -9,11 +15,7 @@ const initialState = {
   error: null,
   accessToken: null,
   refreshToken: null,
-  id: null,
-  balance: null,
-  email: null,
 };
-
 const handlePending = (state) => {
   state.loading = true;
 };
@@ -43,22 +45,19 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.accessToken = action.payload.accessToken;
         state.refreshToken = action.payload.refreshToken;
-        state.balance = action.payload.userData.balance;
-        state.email = action.payload.userData.email;
-        state.id = action.payload.userData.id;
-        state.transactions = action.payload.userData.transactions;
+        state.user = action.payload.user;
       })
       .addCase(logoutUser.fulfilled, () => initialState)
-      .addCase(refreshUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.accessToken = action.payload.accessToken;
-      })
-      .addCase(refreshUser.pending, (state) => {
+      .addCase(refreshUser.pending, (state, action) => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUser.rejected, (state, action) => {
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
         state.isRefreshing = false;
-        state.error = action.payload;
+        state.user = action.payload;
+      })
+      .addCase(refreshUser.rejected, (state) => {
+        state.isRefreshing = false;
       })
       .addMatcher(isPendingAction, handlePending)
       .addMatcher(isRejectAction, handleRejected);
