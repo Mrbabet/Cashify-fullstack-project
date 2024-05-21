@@ -13,7 +13,7 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = "";
 };
 
-export const createUser = createAsyncThunk(
+export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
@@ -25,8 +25,7 @@ export const createUser = createAsyncThunk(
   }
 );
 
-
-export const loginUser = createAsyncThunk(
+export const login = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
@@ -47,7 +46,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const logoutUser = createAsyncThunk(
+export const logout = createAsyncThunk(
   "auth/logout",
   async (_, thunkAPI) => {
     try {
@@ -67,7 +66,7 @@ const getRefreshTokenFromCookie = () => {
   return cookieValue;
 };
 
-export const refreshUser = createAsyncThunk(
+export const refreshToken = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
