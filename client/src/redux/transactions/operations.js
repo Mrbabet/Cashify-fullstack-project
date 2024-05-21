@@ -6,7 +6,6 @@ export const addIncome = createAsyncThunk(
   async (incomeData, { rejectWithValue }) => {
     try {
       const response = await axios.post("/transaction/income", incomeData);
-
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -105,7 +104,6 @@ export const getUserBalance = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get("/users");
-      console.log(response.data)
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

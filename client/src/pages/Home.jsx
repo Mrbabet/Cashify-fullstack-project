@@ -3,19 +3,21 @@ import {
   Flex,
   Image,
   useBreakpointValue,
-  
 } from "@chakra-ui/react";
 import Balance from "../components/Balance/Balance";
 import TransactionManager from "../components/TransactionManager/TransactionManager";
 import reportsIcon from "../assets/bar_chart-24px 1.svg";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserBalance } from "../redux/transactions/operations";
+import { useAuth } from "../hooks/useAuth";
+import { selectLoginCount } from "../redux/auth/selectors";
 
 
 const Home = () => {
   const dispatch = useDispatch();
+
 
   useEffect(() => {
    

@@ -15,6 +15,7 @@ const initialState = {
   error: null,
   accessToken: null,
   refreshToken: null,
+  loginCount: 0
 };
 const handlePending = (state) => {
   state.loading = true;

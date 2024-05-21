@@ -32,9 +32,6 @@ export const loginUser = createAsyncThunk(
       const res = await axios.post('auth/login', credentials, { withCredentials: true });
 
       const { accessToken } = res.data;
-      console.log(accessToken)
-
-      // Set the access token in the authorization header
       setAuthHeader(accessToken);
 
       return res.data;

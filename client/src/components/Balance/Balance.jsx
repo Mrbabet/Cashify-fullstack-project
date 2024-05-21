@@ -9,6 +9,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserBalance } from "../../redux/transactions/operations";
 import { selectBalance } from "../../redux/transactions/selectors";
+import { selectLoginCount } from "../../redux/auth/selectors";
+import UserLoginPopUp from "../UserLoginPopUp/UserLoginPopUp";
+
 
 const Balance = () => {
   const dispatch = useDispatch();
@@ -17,6 +20,9 @@ const Balance = () => {
 
   const currentBalance = useSelector(selectBalance);
   const [balance, setBalance] = useState(selectBalance);
+  const loginCount = useSelector(selectLoginCount)
+
+  console.log(loginCount)
 
   useEffect(() => {
     setBalance(currentBalance);
@@ -51,6 +57,11 @@ const Balance = () => {
         <Flex>
           <Text>Balance:</Text>
         </Flex>
+        <UserLoginPopUp
+          message1="Hello! To get started, enter the current balance of your account!"
+          message2="You can't spend money until you have it :)"
+          userLoginCount={loginCount}
+        /> 
         <Flex gap={[0, 0, 4]}>
           <Input
             borderRadius={["20px 0 0 20px", "20px 0 0 20px", "15px"]}
@@ -79,6 +90,7 @@ const Balance = () => {
             Confirm
           </Button>
         </Flex>
+       
       </Flex>
     </Flex>
   );
