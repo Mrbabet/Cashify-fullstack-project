@@ -39,7 +39,6 @@ const transactionsSlice = createSlice({
   initialState,
   reducers: {
     setActiveCategory(state, action) {
-      // Define a new reducer to set the active category
       state.activeCategory = action.payload;
     },
   },

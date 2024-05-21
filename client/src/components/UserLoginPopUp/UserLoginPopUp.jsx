@@ -6,11 +6,13 @@ import {
   PopoverArrow,
   PopoverBody,
   PopoverCloseButton,
-Text
+Text,
+useBreakpointValue
 } from "@chakra-ui/react";
 
 const Tooltip = ({ message1, message2, userLoginCount}) => {
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   useEffect(() => {
     if (userLoginCount === 1) {
@@ -24,7 +26,7 @@ const Tooltip = ({ message1, message2, userLoginCount}) => {
 
   return (
     <>
-      {isVisible && (
+      {isMobile && isVisible && (
         <Box position="relative">
           <Popover  isOpen={true} placement="bottom" closeOnBlur={false}>
             <PopoverContent  bg="#1D346A" color="white" p={'30px'} width="288px" h={'163px'} mt="50px" borderRadius={'30px'}> 
