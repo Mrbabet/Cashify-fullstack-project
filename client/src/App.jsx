@@ -16,11 +16,16 @@ import { getUserBalance } from "./redux/transactions/operations";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { isRefreshing } = useAuth();
+  const { user, isRefreshing } = useAuth();
+  
 
   useEffect(() => {
-    dispatch(refreshUser());
-    dispatch(getUserBalance())
+   
+      dispatch(refreshUser());
+      dispatch(getUserBalance())
+    
+    
+  
   }, [dispatch]);
   return (
     <>

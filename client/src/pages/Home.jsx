@@ -1,13 +1,11 @@
 import {
   Box,
-  Button,
   Flex,
   Image,
   useBreakpointValue,
-  Input,
+  
 } from "@chakra-ui/react";
 import Balance from "../components/Balance/Balance";
-
 import TransactionManager from "../components/TransactionManager/TransactionManager";
 import reportsIcon from "../assets/bar_chart-24px 1.svg";
 import { Link } from "react-router-dom";
@@ -15,10 +13,15 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getUserBalance } from "../redux/transactions/operations";
 
+
 const Home = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getUserBalance());
+   
+     dispatch(getUserBalance());
+    
+   
   }, [dispatch]);
 
   const flexDirection = useBreakpointValue({

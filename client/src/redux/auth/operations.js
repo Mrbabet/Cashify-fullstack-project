@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = `https://cashify-backend.onrender.com/`;
-// axios.defaults.baseURL = `http://localhost:8000/`;
+// axios.defaults.baseURL = `https://cashify-backend.onrender.com/`;
+axios.defaults.baseURL = `http://localhost:8000/`;
 
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -24,16 +24,18 @@ export const createUser = createAsyncThunk(
     }
   }
 );
+
 export const loginUser = createAsyncThunk(
-  "auth/login",
+  'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("auth/login", credentials,{withCredentials:true});
+      const res = await axios.post('auth/login', credentials, { withCredentials: true });
 
-      const { accessToken} = res.data;
+      const { accessToken } = res.data;
+      console.log(accessToken)
 
+      // Set the access token in the authorization header
       setAuthHeader(accessToken);
-     
 
       return res.data;
     } catch (error) {
@@ -53,14 +55,6 @@ export const logoutUser = createAsyncThunk(
     }
   }
 );
-
-const getRefreshTokenFromCookie = () => {
-  const cookieValue = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("refreshToken="))
-    ?.split("=")[1];
-  return cookieValue;
-};
 
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
