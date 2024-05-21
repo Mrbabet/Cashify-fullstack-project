@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { store } from '../store'
-import { refreshToken, logout } from './authSlice'
+import { refreshUser, logoutUser } from './authSlice'
 
 const api = axios.create({
   baseURL: '`https://cashify-backend.onrender.com/`;', 
@@ -27,12 +27,12 @@ api.interceptors.response.use((response) => {
   if (error.response.status === 401 && !originalRequest._retry) {
     originalRequest._retry = true;
     try {
-      const actionResult = await store.dispatch(refreshToken());
+      const actionResult = await store.dispatch(refreshUser());
       const newToken = actionResult.payload.accessToken;
       originalRequest.headers.Authorization = `Bearer ${newToken}`;
       return api(originalRequest); // Retry original request with new token
     } catch (refreshError) {
-      store.dispatch(logout()); // Dispatch logout action on refresh failure
+      store.dispatch(logoutUser()); // Dispatch logoutUser action on refresh failure
       return Promise.reject(refreshError);
     }
   }
