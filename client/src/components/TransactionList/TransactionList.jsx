@@ -19,6 +19,7 @@ import {
   getIncomeStats,
   deleteTransaction,
   getExpenseStats,
+  getUserBalance,
 } from "../../redux/transactions/operations";
 import {
   selectExpenseStats,
@@ -51,6 +52,7 @@ const TransactionList = ({ transactionType }) => {
     dispatch(deleteTransaction(transactionId)).then(() => {
       dispatch(getExpenseStats());
       dispatch(getIncomeStats());
+      dispatch(getUserBalance())
     });
   };
 
