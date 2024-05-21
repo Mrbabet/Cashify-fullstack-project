@@ -11,18 +11,19 @@ import { updateUserBalance } from "../../redux/transactions/operations";
 import { selectBalance } from "../../redux/transactions/selectors";
 import { selectLoginCount } from "../../redux/auth/selectors";
 import UserLoginPopUp from "../UserLoginPopUp/UserLoginPopUp";
+import { useAuth } from "../../hooks/useAuth";
+
 
 
 const Balance = () => {
+  const {user} = useAuth()
   const dispatch = useDispatch();
   const flexDirection = useBreakpointValue({ base: "column", md: "row" });
   const inputButtonWidth = useBreakpointValue({ base: "100%", md: "auto" });
-
   const currentBalance = useSelector(selectBalance);
-  const [balance, setBalance] = useState(selectBalance);
+  const [balance, setBalance] = useState(user.balance);
   const loginCount = useSelector(selectLoginCount)
 
-  console.log(loginCount)
 
   useEffect(() => {
     setBalance(currentBalance);
